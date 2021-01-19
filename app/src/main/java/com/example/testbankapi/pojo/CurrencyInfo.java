@@ -1,9 +1,9 @@
-package com.example.testbankapi;
+package com.example.testbankapi.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-class CurrencyMonoBank {
+public class CurrencyInfo {
 
     @SerializedName("currencyCodeA")
     @Expose

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="false">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/textViewCurrencyCodeATag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="4dp"
+            android:text="@string/currency_a"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewCurrencyCodeA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="4dp"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/textViewCurrencyCodeATag"
+            app:layout_constraintStart_toEndOf="@+id/textViewCurrencyCodeATag"
+            app:layout_constraintTop_toTopOf="@+id/textViewCurrencyCodeATag"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textViewCurrencyCodeBTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="4dp"
+            android:text="@string/currency_b"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCurrencyCodeATag" />
+
+        <TextView
+            android:id="@+id/textViewCurrencyCodeB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="4dp"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/textViewCurrencyCodeBTag"
+            app:layout_constraintStart_toEndOf="@+id/textViewCurrencyCodeBTag"
+            app:layout_constraintTop_toTopOf="@+id/textViewCurrencyCodeBTag"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textViewDateTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="4dp"
+            android:text="@string/date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCurrencyCodeBTag" />
+
+        <TextView
+            android:id="@+id/textViewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="4dp"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/textViewDateTag"
+            app:layout_constraintStart_toEndOf="@+id/textViewDateTag"
+            app:layout_constraintTop_toTopOf="@+id/textViewDateTag"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textViewRateSellTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="4dp"
+            android:text="@string/rate_sell"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDateTag" />
+
+        <TextView
+            android:id="@+id/textViewRateSell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="4dp"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/textViewRateSellTag"
+            app:layout_constraintStart_toEndOf="@+id/textViewRateSellTag"
+            app:layout_constraintTop_toTopOf="@+id/textViewRateSellTag"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textViewRateBuyTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="4dp"
+            android:text="@string/rate_buy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRateSellTag" />
+
+        <TextView
+            android:id="@+id/textViewRateBuy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="34dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="4dp"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/textViewRateBuyTag"
+            app:layout_constraintStart_toEndOf="@+id/textViewRateBuyTag"
+            app:layout_constraintTop_toTopOf="@+id/textViewRateBuyTag"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textViewRateCrossTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="4dp"
+            android:text="@string/rate_cross"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRateBuyTag" />
+
+        <TextView
+            android:id="@+id/textViewRateCross"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="4dp"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/textViewRateCrossTag"
+            app:layout_constraintStart_toEndOf="@+id/textViewRateCrossTag"
+            app:layout_constraintTop_toTopOf="@+id/textViewRateCrossTag"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

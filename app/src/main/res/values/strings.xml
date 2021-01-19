@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">TestBankAPI</string>
+    <string name="currency_a">Currency A</string>
+    <string name="currency_b">Currency B</string>
+    <string name="date">Update time</string>
+    <string name="rate_sell">Rate Sell</string>
+    <string name="rate_buy">Rate Buy</string>
+    <string name="rate_cross">Rate Cross</string>
+    <string name="get_data">Get Data</string>
 </resources>
