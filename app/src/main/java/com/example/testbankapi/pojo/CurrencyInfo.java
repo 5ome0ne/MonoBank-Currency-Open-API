@@ -3,6 +3,9 @@ package com.example.testbankapi.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * POJO class for currency data.
+ */
 public class CurrencyInfo {
 
     @SerializedName("currencyCodeA")

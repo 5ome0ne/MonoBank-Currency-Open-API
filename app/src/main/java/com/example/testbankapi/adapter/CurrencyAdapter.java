@@ -22,17 +22,26 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
-public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>{
+/**
+ * Adapter for Currency of MonoBank API.
+ */
+public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder> {
 
+    /**
+     * Tag for Log-s.
+     */
     private static final String TAG = CurrencyAdapter.class.getSimpleName();
+
+    /**
+     * List of received exchange rates.
+     */
     private List<CurrencyInfo> currencyInfoList = new ArrayList<>();
 
     @NonNull
     @Override
-    public CurrencyAdapter.CurrencyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CurrencyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.currency_row_item, parent, false);
         return new CurrencyViewHolder(view);
@@ -48,19 +57,22 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
         return currencyInfoList.size();
     }
 
-    public void setItems(Collection<CurrencyInfo> items){
+    public void setItems(Collection<CurrencyInfo> items) {
         currencyInfoList.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearItems(){
+    public void clearItems() {
         currencyInfoList.clear();
         notifyDataSetChanged();
     }
 
+    /**
+     * Holder for representing exchange rates of current currency.
+     */
+    protected static class CurrencyViewHolder extends RecyclerView.ViewHolder {
 
-    public class CurrencyViewHolder extends RecyclerView.ViewHolder {
-
+        private static final String CURRENT_TIME_ZONE = "Europe/Kiev";
         private final TextView textViewCurrencyCodeA;
         private final TextView textViewCurrencyCodeB;
         private final TextView textViewDate;
@@ -79,24 +91,22 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
         }
 
         public void bind(CurrencyInfo currencyInfo) {
-            String curCurrency = String.valueOf(currencyInfo.getCurrencyCodeA());
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                curCurrency = getCurrencyDisplayName(currencyInfo.getCurrencyCodeA());
-            }
-            textViewCurrencyCodeA.setText(curCurrency);
+            String currency;
+            int currencyCode;
 
-            curCurrency = String.valueOf(currencyInfo.getCurrencyCodeB());
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                curCurrency = getCurrencyDisplayName(currencyInfo.getCurrencyCodeB());
-            }
-            textViewCurrencyCodeB.setText(curCurrency);
+            currencyCode = currencyInfo.getCurrencyCodeA();
+            currency = currencyCodeToName(currencyCode);
+            textViewCurrencyCodeA.setText(currency);
+
+            currencyCode = currencyInfo.getCurrencyCodeB();
+            currency = currencyCodeToName(currencyCode);
+            textViewCurrencyCodeB.setText(currency);
 
             Date date = new Date(TimeUnit.SECONDS.toMillis(currencyInfo.getDate()));
-            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.ROOT);
-            dateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Kiev"));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss", Locale.ROOT);
             String gmtTime = dateFormat.format(date);
-
             textViewDate.setText(gmtTime);
+
             textViewRateSell.setText(String.valueOf(currencyInfo.getRateSell()));
             textViewRateBuy.setText(String.valueOf(currencyInfo.getRateBuy()));
 
@@ -107,20 +117,41 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
             textViewRateCross.setText(String.valueOf(rateCross));
         }
 
+        /**
+         * Trying to get currency name by its code
+         *
+         * @return currency name if SDK> = N otherwise its code
+         */
+        public String currencyCodeToName(int currencyCode) {
+            String currencyName;
+            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.N) {
+                currencyName = String.valueOf(currencyCode);
+                return currencyName;
+            }
+            currencyName = getCurrencyName(currencyCode);
+            return currencyName;
+        }
+
+        /**
+         * Get currency name by its code
+         *
+         * @return currency name.
+         */
         @RequiresApi(api = Build.VERSION_CODES.N)
-        public String getCurrencyDisplayName(int numericCode) {
+        public String getCurrencyName(int currencyCode) {
             Set<Currency> currencies = Currency.getAvailableCurrencies();
             for (Currency currency : currencies) {
-                if (currency.getNumericCode() == numericCode) {
+                if (currency.getNumericCode() == currencyCode) {
                     return currency.getDisplayName();
                 }
             }
-            Log.w(TAG, "getCurrencyDisplayName: " + "Currency with numeric code " + numericCode + " not found");
+            Log.w(TAG, "getCurrencyDisplayName: " + "Currency with numeric code " + currencyCode + " not found");
 
-            if (numericCode == 933) {
+            if (currencyCode == 933) {
                 return "Belarussian Ruble";
             }
-            return String.valueOf(numericCode);
+
+            return String.valueOf(currencyCode);
         }
     }
 }

@@ -20,9 +20,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * MainActivity for representing data from API.
+ */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * Tag for Log-s.
+     */
     private static final String TAG = MainActivity.class.getSimpleName();
+
     private RecyclerView recyclerView;
     private CurrencyAdapter currencyAdapter;
 
@@ -31,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         initRecyclerView();
     }
 
+    /**
+     * Initialization RecyclerView.
+     */
     private void initRecyclerView() {
         recyclerView = findViewById(R.id.recyclerViewCurrency);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -43,7 +52,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(currencyAdapter);
     }
 
+    /**
+     * Handling the mouse click.
+     */
     public void onClick(View view) {
+        loadAPIData();
+    }
+
+    /**
+     * GET data using Retrofit and load it to adapter
+     */
+    private void loadAPIData() {
         NetworkService.getInstance()
                 .getJSONApi()
                 .getCurrencyArray()

@@ -3,6 +3,9 @@ package com.example.testbankapi;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Singleton for Retrofit.
+ */
 class NetworkService {
     private static NetworkService mNetworkService;
 
