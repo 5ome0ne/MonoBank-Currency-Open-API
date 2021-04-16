@@ -92,14 +92,14 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
 
         public void bind(CurrencyInfo currencyInfo) {
             String currency;
-            int currencyCode;
+            int currencyNumber;
 
-            currencyCode = currencyInfo.getCurrencyCodeA();
-            currency = currencyCodeToName(currencyCode);
+            currencyNumber = currencyInfo.getCurrencyCodeA();
+            currency = currencyNumberToName(currencyNumber);
             textViewCurrencyCodeA.setText(currency);
 
-            currencyCode = currencyInfo.getCurrencyCodeB();
-            currency = currencyCodeToName(currencyCode);
+            currencyNumber = currencyInfo.getCurrencyCodeB();
+            currency = currencyNumberToName(currencyNumber);
             textViewCurrencyCodeB.setText(currency);
 
             Date date = new Date(TimeUnit.SECONDS.toMillis(currencyInfo.getDate()));
@@ -118,40 +118,42 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
         }
 
         /**
-         * Trying to get currency name by its code
+         * Trying to get currency name by its number
          *
-         * @return currency name if SDK> = N otherwise its code
+         * @param  currencyNumber  Country Currency number (ISO 4217) - IBAN
+         * @return currency name if SDK> = N otherwise its number
          */
-        public String currencyCodeToName(int currencyCode) {
+        public String currencyNumberToName(int currencyNumber) {
             String currencyName;
             if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.N) {
-                currencyName = String.valueOf(currencyCode);
+                currencyName = String.valueOf(currencyNumber);
                 return currencyName;
             }
-            currencyName = getCurrencyName(currencyCode);
+            currencyName = getCurrencyName(currencyNumber);
             return currencyName;
         }
 
         /**
-         * Get currency name by its code
+         * Get currency name by its number
          *
+         * @param  currencyNumber  Country Currency number (ISO 4217) - IBAN
          * @return currency name.
          */
         @RequiresApi(api = Build.VERSION_CODES.N)
-        public String getCurrencyName(int currencyCode) {
+        public String getCurrencyName(int currencyNumber) {
             Set<Currency> currencies = Currency.getAvailableCurrencies();
             for (Currency currency : currencies) {
-                if (currency.getNumericCode() == currencyCode) {
+                if (currency.getNumericCode() == currencyNumber) {
                     return currency.getDisplayName();
                 }
             }
-            Log.w(TAG, "getCurrencyDisplayName: " + "Currency with numeric code " + currencyCode + " not found");
+            Log.w(TAG, "getCurrencyDisplayName: " + "Currency with numeric code " + currencyNumber + " not found");
 
-            if (currencyCode == 933) {
+            if (currencyNumber == 933) {
                 return "Belarussian Ruble";
             }
 
-            return String.valueOf(currencyCode);
+            return String.valueOf(currencyNumber);
         }
     }
 }
